@@ -128,14 +128,65 @@
     box-shadow: 0 4px 12px rgba(255, 90, 95, 0.3);
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
+    .contact-title {
+        font-size: 2.5rem;
+    }
+
+    .contact-grid {
+        gap: 2rem;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-page {
+        padding-top: 6rem;
+    }
+
+    .contact-header {
+        margin-bottom: 3rem;
+    }
+
+    .contact-title {
+        font-size: 2rem;
+    }
+
+    .contact-subtitle {
+        font-size: 1rem;
+    }
+
     .contact-grid {
         grid-template-columns: 1fr;
     }
 
+    .contact-form-card,
     .contact-info-card {
-        order: -1;
-        /* Show info first on mobile? Or maybe kept bottom. Let's keep standard flow */
-        padding: 2rem;
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+
+    .info-item {
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .info-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-title {
+        font-size: 1.75rem;
+    }
+
+    .social-icons-contact {
+        justify-content: center;
+    }
+
+    .social-title {
+        text-align: center;
     }
 }

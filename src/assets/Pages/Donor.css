@@ -150,13 +150,73 @@
     transform: none;
 }
 
-@media (max-width: 600px) {
-    .form-grid {
-        grid-template-columns: 1fr;
+@media (max-width: 992px) {
+    .donor-container {
+        max-width: 100%;
+        padding: 0 1rem;
     }
 
     .form-card {
-        padding: 1.5rem;
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .donor-page {
+        padding-top: 6rem;
+    }
+
+    .form-title {
+        font-size: 2rem;
+    }
+
+    .status-title {
+        font-size: 1.75rem;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .request-item {
+        padding: 1.5rem !important;
+    }
+
+    .request-item>div:first-child {
+        flex-direction: column;
+        align-items: flex-start !important;
+        gap: 1rem !important;
+    }
+
+    .request-item>div:nth-child(2) {
+        grid-template-columns: 1fr !important;
+    }
+
+    .request-item>div:last-child {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-title {
+        font-size: 1.75rem;
+    }
+
+    .form-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-upload {
+        width: 100%;
     }
 }
 

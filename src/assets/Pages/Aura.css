@@ -273,14 +273,74 @@
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
+    .aura-header-bg {
+        padding: 7rem 0 4rem;
+    }
+
     .aura-title {
-        font-size: 2.5rem;
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .aura-header-bg {
+        padding: 6rem 1rem 4rem;
+    }
+
+    .aura-title {
+        font-size: 2.2rem;
+    }
+
+    .aura-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .discovery-controls {
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: -2rem;
+        padding: 1.25rem;
+        margin-bottom: 3rem;
+    }
+
+    .search-box {
+        min-width: 100%;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .sort-select {
+        width: 100%;
     }
 
     .donors-grid {
-        margin-top: 2rem;
-        padding: 0 1.5rem;
+        grid-template-columns: 1fr;
+        margin-top: 0;
+        padding: 0 1rem;
+    }
+
+    .modal-content {
+        padding: 2rem 1.5rem;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .aura-title {
+        font-size: 1.8rem;
+    }
+
+    .donor-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.5rem;
+    }
+
+    .donor-card-body {
+        padding: 1.5rem;
     }
 }
 

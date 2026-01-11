@@ -184,12 +184,36 @@
 }
 
 @media (max-width: 768px) {
+    .auth-container {
+        padding: 6rem 1rem 3rem;
+    }
+
+    .auth-box {
+        padding: 3rem 1.5rem 2rem;
+        border-radius: 16px;
+    }
+
+    .auth-title {
+        font-size: 2rem;
+    }
+
     .role-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
     }
 
-    .auth-box {
-        padding: 2rem 1.5rem;
+    .back-btn {
+        top: 1rem;
+        left: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-title {
+        font-size: 1.8rem;
+    }
+
+    .auth-subtitle {
+        font-size: 0.95rem;
     }
 }

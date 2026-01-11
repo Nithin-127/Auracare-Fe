@@ -46,9 +46,22 @@ button {
   padding: 0 2rem;
 }
 
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
 .text-gradient {
-  background: linear-gradient(135deg, var(--text-dark) 0%, var(--primary-red) 100%);
+  background: linear-gradient(135deg, var(--primary-red) 0%, #ff8a8f 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
@@ -59,6 +72,13 @@ button {
   font-weight: 600;
   transition: all 0.3s ease;
   font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+  .btn {
+    padding: 0.8rem 1.5rem;
+    font-size: 0.9rem;
+  }
 }
 
 .btn-primary {
@@ -86,4 +106,10 @@ button {
 
 .section-padding {
   padding: 6rem 0;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding: 4rem 0;
+  }
 }

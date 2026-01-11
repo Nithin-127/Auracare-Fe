@@ -23,6 +23,8 @@ const Admin = () => {
   const [messages, setMessages] = useState([]);
   const [selectedRequest, setSelectedRequest] = useState(null);
   
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  
   // Profile Editing States
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [profileForm, setProfileForm] = useState({
@@ -41,6 +43,19 @@ const Admin = () => {
       fetchMessages();
     }
   }, [isAuthorized, userData, navigate]);
+
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+
+  const closeMobileSidebar = () => {
+    setIsMobileSidebarOpen(false);
+  };
+
+  const handleDashboardTabClick = (tab) => {
+    setDashboardTab(tab);
+    closeMobileSidebar();
+  };
 
   const fetchData = async () => {
     const token = sessionStorage.getItem("token");
@@ -184,30 +199,50 @@ const Admin = () => {
   const receiversOnly = requests.filter(req => req.type === 'receiver');
 
   return (
-    <div className="admin-layout">
+    <div className={`admin-layout ${isMobileSidebarOpen ? 'mobile-sidebar-open' : ''}`}>
+      {/* Mobile Header */}
+      <div className="admin-mobile-header">
+        <button className="mobile-toggle-btn" onClick={toggleMobileSidebar}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span className="mobile-brand">AuraCare Admin</span>
+        <div className="mobile-admin-info">
+          <div className="user-avatar-small">
+            {userData?.profilePic ? (
+              <img src={`${BASE_URL}/uploads/${userData.profilePic}`} alt="Admin" style={{width: '100%', height: '100%', borderRadius: 'inherit', objectFit: 'cover'}} />
+            ) : (
+              userData?.fullName?.charAt(0)
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Sidebar Overlay */}
+      <div className="sidebar-overlay" onClick={closeMobileSidebar}></div>
+
       {/* Sidebar */}
       <aside className="admin-sidebar">
         <div className="sidebar-brand">
           <span>AuraCare Admin</span>
         </div>
         <nav className="sidebar-nav">
-          <div className={`nav-item ${dashboardTab === 'home' ? 'active' : ''}`} onClick={() => setDashboardTab('home')}>
+          <div className={`nav-item ${dashboardTab === 'home' ? 'active' : ''}`} onClick={() => handleDashboardTabClick('home')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
             <span>Home</span>
           </div>
-          <div className={`nav-item ${dashboardTab === 'donors' ? 'active' : ''}`} onClick={() => setDashboardTab('donors')}>
+          <div className={`nav-item ${dashboardTab === 'donors' ? 'active' : ''}`} onClick={() => handleDashboardTabClick('donors')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
             <span>Donor List</span>
           </div>
-          <div className={`nav-item ${dashboardTab === 'receivers' ? 'active' : ''}`} onClick={() => setDashboardTab('receivers')}>
+          <div className={`nav-item ${dashboardTab === 'receivers' ? 'active' : ''}`} onClick={() => handleDashboardTabClick('receivers')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
             <span>Receiver List</span>
           </div>
-          <div className={`nav-item ${dashboardTab === 'messages' ? 'active' : ''}`} onClick={() => setDashboardTab('messages')}>
+          <div className={`nav-item ${dashboardTab === 'messages' ? 'active' : ''}`} onClick={() => handleDashboardTabClick('messages')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
             <span>Messages</span>
           </div>
-          <div className={`nav-item ${dashboardTab === 'profile' ? 'active' : ''}`} onClick={() => setDashboardTab('profile')}>
+          <div className={`nav-item ${dashboardTab === 'profile' ? 'active' : ''}`} onClick={() => handleDashboardTabClick('profile')}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             <span>Profile</span>
           </div>

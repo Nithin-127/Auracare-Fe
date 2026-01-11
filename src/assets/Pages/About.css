@@ -101,13 +101,72 @@
     font-size: 0.95rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
+    .about-title {
+        font-size: 3rem;
+    }
+
+    .about-image {
+        height: 300px;
+    }
+
     .story-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-hero-section {
+        padding-top: 6rem;
     }
 
     .about-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
+    }
+
+    .about-subtitle {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+
+    .about-image-wrapper {
+        margin-bottom: -40px;
+        padding: 0 1rem;
+    }
+
+    .about-image {
+        height: 250px;
+        border-radius: 16px;
+    }
+
+    .mission-section {
+        padding-top: 80px;
+    }
+
+    .story-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .story-content h2 {
+        font-size: 2rem;
+    }
+
+    .story-content p {
+        font-size: 1rem;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-title {
+        font-size: 1.8rem;
+    }
+
+    .about-image {
+        height: 200px;
     }
 }

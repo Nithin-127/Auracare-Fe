@@ -256,13 +256,56 @@
     box-shadow: 0 4px 10px rgba(255, 90, 95, 0.2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .profile-container {
         grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .profile-sidebar {
         position: static;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .profile-nav {
+        width: 100%;
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-page {
+        padding-top: 6rem;
+    }
+
+    .profile-content {
+        padding: 1.5rem;
+        border-radius: 16px;
+    }
+
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .edit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .save-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        width: 100%;
     }
 }
 
@@ -280,6 +323,17 @@
     margin-left: 0.5rem;
 }
 
-.status-badge.pending { background: #fef3c7; color: #d97706; }
-.status-badge.approved { background: #d1fae5; color: #059669; }
-.status-badge.rejected { background: #fee2e2; color: #dc2626; }
+.status-badge.pending {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.status-badge.approved {
+    background: #d1fae5;
+    color: #059669;
+}
+
+.status-badge.rejected {
+    background: #fee2e2;
+    color: #dc2626;
+}
