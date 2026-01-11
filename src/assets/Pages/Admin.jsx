@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import { useNavigate } from 'react-router-dom';
-import { getAdminStatsAPI, getAllDonorsAPI, getAllReceiversAPI, updateDonorStatusAPI, updateReceiverStatusAPI, getAllMessagesAPI, updateProfileAPI } from '../services/Appapi';
+import { getAdminStatsAPI, getAllDonorsAPI, getAllReceiversAPI, updateDonorStatusAPI, updateReceiverStatusAPI, getAllMessagesAPI, updateProfileAPI, deleteDonorAPI, deleteReceiverAPI } from '../services/Appapi';
 import { BASE_URL } from '../services/Baseurl';
 import { toast } from 'react-toastify';
 import './Admin.css';
@@ -90,6 +90,28 @@ const Admin = () => {
       fetchData(); // Refresh data
     } else {
       toast.error("Status update failed");
+    }
+  };
+
+  const handleDeleteUser = async (id, type) => {
+    const token = sessionStorage.getItem("token");
+    const header = { "Authorization": `Bearer ${token}` };
+    
+    // Simple confirmation dialog
+    if (window.confirm(`Are you sure you want to remove this ${type}? This action cannot be undone.`)) {
+      let result;
+      if (type === 'donor') {
+        result = await deleteDonorAPI(id, header);
+      } else {
+        result = await deleteReceiverAPI(id, header);
+      }
+
+      if (result.status === 200) {
+        toast.success(`${type.charAt(0).toUpperCase() + type.slice(1)} removed successfully`);
+        fetchData(); // Refresh data to reflect deletion
+      } else {
+        toast.error("Failed to remove user");
+      }
     }
   };
 
@@ -295,6 +317,7 @@ const Admin = () => {
                         <th>Address</th>
                         <th>Organs Pledged</th>
                         <th>Status</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -336,6 +359,9 @@ const Admin = () => {
                             </div>
                           </td>
                           <td><span className={`status-badge ${donor.status}`}>● {donor.status?.toUpperCase()}</span></td>
+                          <td>
+                            <button className="btn btn-sm" style={{color: '#dc2626', border: '1px solid #dc2626', background: 'transparent'}} onClick={() => handleDeleteUser(donor._id, 'donor')}>Remove</button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>
@@ -361,6 +387,7 @@ const Admin = () => {
                         <th>Address</th>
                         <th>Organ Needed</th>
                         <th>Status</th>
+                        <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -398,6 +425,9 @@ const Admin = () => {
                             </span>
                           </td>
                           <td><span className={`status-badge ${receiver.status}`}>● {receiver.status?.toUpperCase()}</span></td>
+                          <td>
+                            <button className="btn btn-sm" style={{color: '#dc2626', border: '1px solid #dc2626', background: 'transparent'}} onClick={() => handleDeleteUser(receiver._id, 'receiver')}>Remove</button>
+                          </td>
                         </tr>
                       ))}
                     </tbody>

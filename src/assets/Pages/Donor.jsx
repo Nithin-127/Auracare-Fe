@@ -173,7 +173,8 @@ const Donor = () => {
       }
       navigate('/profile');
     } else {
-      toast.error(result.response?.data?.message || "Registration Failed");
+      console.error("Registration Error Detail:", result);
+      toast.error(result.response?.data?.message || result.message || "Registration Failed");
     }
   };
 

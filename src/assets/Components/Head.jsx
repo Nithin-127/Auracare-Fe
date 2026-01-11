@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext';
 import { BASE_URL } from '../services/Baseurl';
@@ -6,14 +6,24 @@ import './Head.css';
 
 const Head = () => {
   const { isAuthorized, logout, userData } = useContext(AuthContext);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
   
   const isActive = (path) => location.pathname === path ? 'active-link' : '';
 
-  const handleLogout = () => {
+  const handleLogoutClick = () => {
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = () => {
     logout();
+    setShowLogoutModal(false);
     navigate('/');
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutModal(false);
   };
 
   return (
@@ -62,7 +72,7 @@ const Head = () => {
             <div className="user-profile-nav">
 
               <span className="user-name">Hi, {userData?.fullName?.split(' ')[0]}</span>
-              <button onClick={handleLogout} className="btn btn-outline btn-sm">Log Out</button>
+              <button onClick={handleLogoutClick} className="btn btn-outline btn-sm">Log Out</button>
             </div>
           ) : (
             <>
@@ -72,6 +82,19 @@ const Head = () => {
           )}
         </div>
       </div>
+
+      {showLogoutModal && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h3>Confirm Logout</h3>
+            <p>If you really want to logout select Yes, otherwise Cancel.</p>
+            <div className="modal-actions">
+              <button onClick={confirmLogout} className="btn btn-primary btn-sm" style={{backgroundColor: 'var(--primary-red)', color: 'white'}}>Yes, Logout</button>
+              <button onClick={cancelLogout} className="btn btn-outline btn-sm">Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 };

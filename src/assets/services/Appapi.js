@@ -66,6 +66,16 @@ export const updateReceiverStatusAPI = async (id, reqBody, header) => {
     return await commonAPI('PATCH', `${BASE_URL}/admin/receiver/${id}/status`, reqBody, header);
 };
 
+// Admin - Delete donor
+export const deleteDonorAPI = async (id, header) => {
+    return await commonAPI('DELETE', `${BASE_URL}/admin/donor/${id}`, "", header);
+};
+
+// Admin - Delete receiver
+export const deleteReceiverAPI = async (id, header) => {
+    return await commonAPI('DELETE', `${BASE_URL}/admin/receiver/${id}`, "", header);
+};
+
 // Public - Get approved donors
 export const getApprovedDonorsAPI = async () => {
     return await commonAPI('GET', `${BASE_URL}/approved-donors`, "", "");
