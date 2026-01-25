@@ -633,8 +633,9 @@ const Admin = () => {
                         </div>
                       </div>
                       <div className="info-group-modal">
-                        <label>Witness Name</label>
-                        <p>{selectedRequest.witnessName} ({selectedRequest.witnessRelation})</p>
+                        <label>Witness Details</label>
+                        <p>Name: {selectedRequest.witnessName} ({selectedRequest.witnessRelation})</p>
+                        <p>Phone: {selectedRequest.witnessPhone}</p>
                       </div>
                     </>
                   ) : (

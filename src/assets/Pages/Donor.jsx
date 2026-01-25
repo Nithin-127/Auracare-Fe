@@ -73,6 +73,7 @@ const Donor = () => {
       lungs: false,
       pancreas: false,
       eyes: false,
+      blood: false,
     },
     agreement: false,
     photo: null,
@@ -81,6 +82,7 @@ const Donor = () => {
     doctorInCharge: '',
     witnessName: '',
     witnessRelation: '',
+    witnessPhone: '',
     witnessPhoto: null,
     witnessPhotoPreview: null
   });
@@ -131,7 +133,7 @@ const Donor = () => {
     
     const { 
       firstName, lastName, email, phone, dob, gender, bloodGroup, 
-      address, city, state, organs, photo, witnessName, witnessRelation, witnessPhoto,
+      address, city, state, organs, photo, witnessName, witnessRelation, witnessPhone, witnessPhoto,
       hospitalName, doctorInCharge 
     } = formData;
 
@@ -155,6 +157,7 @@ const Donor = () => {
     reqBody.append("photo", photo);
     reqBody.append("witnessName", witnessName);
     reqBody.append("witnessRelation", witnessRelation);
+    reqBody.append("witnessPhone", witnessPhone);
     reqBody.append("witnessPhoto", witnessPhoto);
     reqBody.append("hospitalName", hospitalName);
     reqBody.append("doctorInCharge", doctorInCharge);
@@ -423,7 +426,7 @@ const Donor = () => {
               </h3>
               <p style={{marginBottom: '1rem', color: 'var(--text-light)', fontSize: '0.9rem'}}>Select the organs/tissues you wish to pledge:</p>
               <div className="checkbox-group">
-                {['Kidneys', 'Liver', 'Heart', 'Lungs', 'Pancreas', 'Eyes'].map((organ) => (
+                {['Kidneys', 'Liver', 'Heart', 'Lungs', 'Pancreas', 'Eyes', 'Blood'].map((organ) => (
                   <label key={organ} className="checkbox-label">
                     <input 
                       type="checkbox" 
@@ -453,6 +456,10 @@ const Donor = () => {
                 <div className="form-group">
                   <label className="form-label">Relationship to Donor</label>
                   <input required name="witnessRelation" value={formData.witnessRelation} onChange={handleChange} type="text" className="form-input" placeholder="e.g. Spouse, Parent, Sibling" />
+                </div>
+                <div className="form-group">
+                  <label className="form-label">Witness Phone Number</label>
+                  <input required name="witnessPhone" value={formData.witnessPhone} onChange={handleChange} type="tel" className="form-input" placeholder="+1 (555) 000-0000" />
                 </div>
                 
                 <div className="form-group full-width">

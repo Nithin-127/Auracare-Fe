@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Home from './assets/Pages/Home';
 import About from './assets/Pages/About';
@@ -14,13 +15,26 @@ import PaymentSuccess from './assets/Pages/PaymentSuccess';
 import BookDoctor from './assets/Pages/BookDoctor';
 import Head from './assets/Components/Head';
 import Footer from './assets/Components/Footer';
+import Loader from './assets/Components/Loader';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
+  const [loading, setLoading] = useState(true);
   const location = useLocation();
   const isAdmin = location.pathname === '/admin';
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="App">
